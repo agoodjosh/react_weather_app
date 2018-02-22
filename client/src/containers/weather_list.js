@@ -9,7 +9,6 @@ class WeatherList extends Component {
         super(props);
     }
     renderWeather(cityData) {
-        debugger;
         console.log('renderWeather:', cityData);
         // console.log('renderWeather props:', this.props.weather);
         // const name = cityData.city.name;
@@ -41,12 +40,12 @@ class WeatherList extends Component {
                         <th>Humidity (%)</th>
                     </tr>
                 </thead>
-                {/*<tbody>
+                {<tbody>
                     {this
                         .props
                         .weather
                         .map(this.renderWeather)}
-                    </tbody>*/}
+                </tbody>}
             </table>
         );
     }
