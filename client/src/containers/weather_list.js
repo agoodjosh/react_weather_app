@@ -8,8 +8,10 @@ class WeatherList extends Component {
     constructor(props) {
         super(props);
     }
-    renderWeather(cityData) {
-        console.log('renderWeather:', cityData);
+    renderWeather(arr, lon, lat) {
+        console.log(`renderWeather:, ${arr}, ${lon}, ${lat}`);
+
+
         // console.log('renderWeather props:', this.props.weather);
         // const name = cityData.city.name;
         // const temps = _.map(cityData.list.map(weather => weather.main.temp), (temp) => temp * 9 / 5 - 459.67);
@@ -19,17 +21,22 @@ class WeatherList extends Component {
         // const humidities = cityData
         //     .list
         //     .map(weather => weather.main.humidity);
-        const { lon, lat } = cityData.city.coord;
+        //  Pull This FROM DATA!!!!!                        prob change this though
+        // const { temperatureHigh, temperatureLow, time } = resp.data.daily.data[0];
+
+        // const { lon, lat } = cityData.city.coord;
         // <td><Chart data={temps} color="orange" units="F" /></td>
         // <td><Chart data={pressures} color="green" units="hPa" /></td>
-        return (
-            <tr key={name}>
-                <td><GoogleMap lon={lon} lat={lat} /></td>
-            </tr>
-        );
+        // return (
+        //     <tr key={name}>
+        //         <td><GoogleMap lon={lon} lat={lat} /></td>
+        //     </tr>
+        // );
     }
 
     render() {
+        console.log('PROPS', this.props);
+        const { past_weather, lon, lat } = this.props;
         return (
             <table className="table table-hover">
                 <thead>
@@ -41,10 +48,9 @@ class WeatherList extends Component {
                     </tr>
                 </thead>
                 {<tbody>
-                    {this
-                        .props
-                        .weather
-                        .map(this.renderWeather)}
+                    {
+                        lat !== null ? this.renderWeather(past_weather, lon, lat) : ""
+                    }
                 </tbody>}
             </table>
         );
@@ -53,8 +59,10 @@ class WeatherList extends Component {
 
 function mapStateToProps(state) {
     return {
-        weather: state.weather
-    }; // {weather} === {weather: weather}
+        lon: state.weather.lon,
+        lat: state.weather.lat,
+        past_weather: state.weather.past_weather
+    };
 }
 
 export default connect(mapStateToProps)(WeatherList);

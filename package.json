@@ -1,0 +1,32 @@
+{
+  "name": "arcules_app",
+  "version": "1.0.0",
+  "description": "A weather app for Arculus's coding assignment.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon app.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaUXsh/react_weather_app.git"
+  },
+  "author": "Josh Chang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaUXsh/react_weather_app/issues"
+  },
+  "homepage": "https://github.com/jaUXsh/react_weather_app#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "nodemon": "^1.15.1"
+  }
+}
