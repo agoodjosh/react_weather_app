@@ -1,17 +1,26 @@
-td, th {
-    vertical-align: middle !important;
-    text-align: center !important;
-}
 
 .input-group {
     margin: 20px 0;
 }
 
-svg {
-    height: 150px;
+.gmap-container {
+    height: 40vh;
+    width: 70%;
+    position: relative;
+    left: 15%;
 }
 
-td:first-of-type, td:first-of-type > div {
-    height: 200px;
-    width: 250px;
+#google-map {
+    height: 100%;
+    width: 100%;
+}
+
+.past-weather-container {
+    display: flex;
+}
+
+.past-weather {
+    flex-basis: 13%;
+    margin: 5px;
+    text-align: center;
 }

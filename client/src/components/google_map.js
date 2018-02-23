@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class GoogleMap extends Component {
     componentDidMount() {
@@ -13,7 +13,7 @@ class GoogleMap extends Component {
             });
     }
     render() {
-        return <div ref="map"/>
+        return <div id='google-map' ref="map"></div>
     }
 }
 
