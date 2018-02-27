@@ -3,6 +3,7 @@ import types from '../actions/types';
 const DEFAULT_STATE = {
     lat: null,
     lon: null,
+    name: "",
     past_weather: []
 }
 
@@ -12,7 +13,7 @@ export default function (state = DEFAULT_STATE, action) {
             // console.log('FETCH_COOR Reducer STATE:', ...state);
             // console.log('FETCH_COOR Reducer LON STATE:', action.lon);
             // console.log('FETCH_COOR Reducer LAT STATE:', action.lat);
-            return { ...state, lat: action.lat, lon: action.lon }// returns [city, city, city ] NOT [city, [city, city], city ]
+            return { ...state, lat: action.lat, lon: action.lon, name: action.name }// returns [city, city, city ] NOT [city, [city, city], city ]
         case types.FETCH_PAST:
             // console.log('FETCH PASSED / MULTIPLE ACTIONS WORKED! :', ...state);
             // console.log('FETCH PASSED / MULTIPLE ACTIONS WORKED! :', action.payload);

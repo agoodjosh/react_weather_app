@@ -3,7 +3,7 @@ import types from './types';
 
 
 const owmAPI_KEY = 'e91b56c3268b16226a9a564c07f12b68';
-// const ROOT_URL = `https://api.darksky.net/forecast/${802d496a31e673d1b88d971d70a0b546}/37.8267,-122.4233,2018-02-21T00:00:00?exclude=minutely,hourly,flags,isd-stations`;
+
 const ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${owmAPI_KEY}`;
 
 export function fetchWeather(city) {
@@ -17,9 +17,9 @@ export function fetchWeather(city) {
                 dispatch({
                     type: types.FETCH_COOR,
                     lat: lat,
-                    lon: lon
+                    lon: lon,
+                    name: resp.data.city.name
                 });
-                console.log('fetchWEATHER action', resp);
                 const time = resp.data.list[0].dt_txt;
 
                 let pastWeek = [];
@@ -67,7 +67,6 @@ export function fetchWeather(city) {
                     time: pastWeek[6]
                 });
                 axios.all([today, minus1day, minus2days, minus3days, minus4days, minus5days, minus6days]).then(resp => {
-                    console.log('AXIOS.ALL RESP:', resp)
                     dispatch({
                         type: types.FETCH_PAST,
                         payload: resp

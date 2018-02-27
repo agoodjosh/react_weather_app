@@ -8,55 +8,29 @@ import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 
 import Chart from '../components/chart';
-import GoogleMap from '../components/google_map';
 import Skycon from '../components/skycon';
 
 class WeatherList extends Component {
     constructor(props) {
         super(props);
-
+        // this.renderMap = this.renderMap.bind(this);
     }
-    renderWeather(arr) {
-        console.log(`renderWeather:, ${arr}`);
-        arr.map((item, index) => {
-            const { icon, temperatureHigh, temperatureLow, time } = item.data.daily.data[0];
-            const convertDate = Date(time);
-            const dateArr = convertDate.split(" ");
-            const formatDate = `${dateArr[0]} ${dateArr[1]} ${dateArr[2]}, ${dateArr[3]}`;
-            return (
-                <div key={index}>
-                    <Skycon icon={icon} />
-                    <p>{temperatureHigh} degrees F</p>
-                    <p>{temperatureLow} degrees F</p>
-                </div>
-            )
-        });
 
-        // console.log('renderWeather props:', this.props.weather);
-        // const name = cityData.city.name;
-        // const temps = _.map(cityData.list.map(weather => weather.main.temp), (temp) => temp * 9 / 5 - 459.67);
-        // const pressures = cityData
-        //     .list
-        //     .map(weather => weather.main.pressure);
-        // const humidities = cityData
-        //     .list
-        //     .map(weather => weather.main.humidity);
-        //  Pull This FROM DATA!!!!!                        prob change this though
-        // const { temperatureHigh, temperatureLow, time } = resp.data.daily.data[0];
+    // renderMap(lon, lat) {
+    //     return (
+    //         <GoogleMap lon={lon} lat={lat} />
+    //     )
+    // }
 
-        // const { lon, lat } = cityData.city.coord;
-        // <td><Chart data={temps} color="orange" units="F" /></td>
-        // <td><Chart data={pressures} color="green" units="hPa" /></td>
-        // return (
-        //     <tr key={name}>
-        //         <td><GoogleMap lon={lon} lat={lat} /></td>
-        //     </tr>
-        // );
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     if (this.props.lat !== nextProps.lat) {
+    //         this.renderMap(nextProps.lon, nextProps.lat);
+    //     }
+    // }
 
     render() {
 
-        const { past_weather, lon, lat } = this.props;
+        const { past_weather, lon, lat, name } = this.props;
 
         const lastWeek = past_weather.map((item, index) => {
             console.log('MAP:', item);
@@ -65,15 +39,15 @@ class WeatherList extends Component {
             return (
                 <div className="past-weather col s7 m4 l2" key={index}>
                     <Skycon icon={icon} />
-                    <p>High: {temperatureHigh} ºF</p>
-                    <p>Low: {temperatureLow} ºF</p>
+                    <p>H: {temperatureHigh} ºF</p>
+                    <p>L: {temperatureLow} ºF</p>
                     <Moment unix format="MM/DD/YYYY">{time}</Moment>
                 </div>
             )
         });
         return (
-            <div className="gmap-container">
-                {lat !== null ? <GoogleMap lon={lon} lat={lat} /> : ""}
+            <div>
+                <h3 className="main-title">{name !== "" ? `Last Week's Weather in ${name}:` : "Please enter a US city to get past week's weather!"}</h3>
                 <div className=" past-weather-container row">
                     {past_weather !== null ? lastWeek : ""}
                 </div>
@@ -86,6 +60,7 @@ function mapStateToProps(state) {
     return {
         lon: state.weather.lon,
         lat: state.weather.lat,
+        name: state.weather.name,
         past_weather: state.weather.past_weather
     };
 }

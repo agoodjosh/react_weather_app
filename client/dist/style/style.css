@@ -3,20 +3,13 @@
     margin: 20px 0;
 }
 
-.gmap-container {
-    height: 40vh;
-    width: 70%;
-    position: relative;
-    left: 15%;
-}
-
-#google-map {
-    height: 100%;
-    width: 100%;
+.main-title {
+    text-align: center;
 }
 
 .past-weather-container {
     display: flex;
+    overflow-x: auto;
 }
 
 .past-weather {
